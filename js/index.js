@@ -45,5 +45,5 @@ if (pedido == 1) {
         alert("Seleccionaste: " + poleronDeanNegro.nombre + ", el total de tu pedido es de $" + poleronDeanNegro.importe * cantidad);
     } else {
         alert("No contamos con ese producto");
-    }       
-    alert("Gracias por elegirnos. Seguinos en redes sociales para encontrar descuentos!")
+    };
+    alert("Gracias por elegirnos. Seguinos en redes sociales para encontrar descuentos!");
