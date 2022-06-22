@@ -160,10 +160,13 @@ console.log(cart)
 function mostrarProductos() {
   articulos.forEach((product) => {
     let card = document.createElement("div");
-    div.setAttribute("class", "card col-md-3")
+    card.classList.add("card-body")
     showAllProducts.append(card);
     let img = document.createElement("img");
-    img.setAttribute("src", product.img, "class");
+    img.setAttribute("src", product.img);
+    img.classList.add("card-img-top")
+    img.classList.add("img-fluid")
+    img.classList.add("img-thumbnail")
     let nombre = document.createElement("h3");
     nombre.setAttribute("class", "card-text text-center")
     nombre.innerText = product.nombre;
@@ -188,9 +191,7 @@ console.log(cart)
 mostrarProductos();
 
 // Carrito
-let cartView = document.getElementById("showProductsCart");
-let goToCart = document.getElementById("goToCart");
-let carrrito = document.getElementById("cartList");
+let carrito = document.getElementById("cartList");
 const buttonCart = document.getElementById("mostrarCarrito");
 
 let alertCart = document.createElement("h2");
@@ -206,7 +207,7 @@ function showCart() {
   cart.forEach((element) => {
     const divCart = document.createElement('li');
     divCart.innerHTML += `
-        <img src= "${element.img}">
+        <img src= "${element.img}" class="card-img-top img-fluid img-thumbnail">
         <h3>${element.nombre}</h3>
         <h3>$${element.importe}</h3>`
 
