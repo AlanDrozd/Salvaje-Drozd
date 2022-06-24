@@ -1,3 +1,185 @@
+const articulos = [];
+
+class Producto {
+  constructor(id, nombre, importe, categoria, img) {
+    this.id = id;
+    this.nombre = nombre;
+    this.importe = importe;
+    this.categoria = categoria;
+    this.img = img;
+  }
+}
+
+articulos.push(
+  new Producto(
+    1,
+    "Polerin Yaro Negro",
+    3790,
+    "Ropa",
+    "./assets/images/card/card1.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    2,
+    "Poleron Dean Crudo",
+    8990,
+    "Ropa",
+    "./assets/images/card/card2.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    3,
+    "Jean Jacob",
+    8990,
+    "Ropa",
+    "./assets/images/card/card3.jpg")
+);
+articulos.push(
+  new Producto(
+    4,
+    "Poleron Dean Negro",
+    8990,
+    "Ropa",
+    "./assets/images/card/card4.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    5,
+    "Kit Male Grooming",
+    5890,
+    "MakeUp",
+    "./assets/images/card/makeup1.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    6,
+    "Mascara en gel",
+    1520,
+    "MakeUp",
+    "./assets/images/card/makeup2.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    7,
+    "Primer Filler",
+    1290,
+    "MakeUp",
+    "./assets/images/card/makeup3.jpg"
+  )
+);
+articulos.push(
+  new Producto(
+    8,
+    "Corrector Liquido",
+    1290,
+    "MakeUp",
+    "./assets/images/card/makeup4.jpg"
+  )
+);
+
+// let title = document.getElementById("title");
+// let showProducts = document.getElementById("showProducts")
+let showAllProducts = document.getElementById("showAllProducts");
+const div = document.querySelector(".div");
+
+let cart = [];
+console.log(cart)
+
+function mostrarProductos() {
+  articulos.forEach((product) => {
+    let card = document.createElement("div");
+    card.classList.add("card-body")
+    showAllProducts.append(card);
+    let img = document.createElement("img");
+    img.setAttribute("src", product.img);
+    img.classList.add("card-img-top")
+    img.classList.add("img-fluid")
+    img.classList.add("img-thumbnail")
+    let nombre = document.createElement("h5");
+    nombre.setAttribute("class", "card-text text-center")
+    nombre.innerText = product.nombre;
+    let importe = document.createElement("p");
+    importe.setAttribute("class", "card-text text-center")
+    importe.innerText = "$" + product.importe + ".-";
+    let buyButton = document.createElement("button");
+    buyButton.innerText = "Agregar al carrito";
+    card.append(img);
+    card.append(nombre, importe, buyButton)
+
+    buyButton.addEventListener("click", function () {
+      cart.push(product);
+      alert("Agregaste " + product.nombre + "al carrito");
+      // divCart.innerHTML = ``
+      div.innerHTML = ``;
+      showCart();
+    });
+  });
+}
+console.log(cart)
+
+mostrarProductos();
+
+// Carrito
+let carrito = document.getElementById("cartList");
+const buttonCart = document.getElementById("mostrarCarrito");
+
+let alertCart = document.createElement("h2");
+
+if (!cart.lenght) {
+  alertCart.innerText = "El carrito esta vacio";
+  div.append(alertCart);
+}
+
+function showCart() {
+  alertCart.remove();
+
+  cart.forEach((element) => {
+    const divCart = document.createElement('div');
+    divCart.innerHTML += `
+        <img src= "${element.img}" class="card-img-top img-fluid img-thumbnail">
+        <div>
+        <h3>${element.nombre}</h3>
+        <h3>$${element.importe}</h3>
+        </div>
+        `
+    div.appendChild(divCart);
+  });
+  
+  // Precio total
+  const total = cart
+    .map((item) => parseInt(item.importe))
+    .reduce(
+      (cartTotalPrice, currentItemPrice) => cartTotalPrice + currentItemPrice,
+      0
+    );
+  let totalCompra = document.createElement("h4");
+  totalCompra.innerText = ("Total: " + total);
+  div.append(totalCompra);
+
+  // Vaciar
+  let deleteCart = document.createElement("button");
+  deleteCart.innerText = "Vaciar carrito";
+  div.append(deleteCart);
+
+  deleteCart.onclick = () => {
+    cart = []
+    div.innerHTML = ``
+    console.log(cart)
+  }
+}
+
+buttonCart.onclick = () => {
+    div.innerHTML = ``
+    showCart()
+}
+
+
+
 // alert ("Coderhourse 2022 - Primer pre entrega - Alan Drozd");
 // alert ("Para visualizar este sitio por favor ingresa: \nUsuario:coder \nClave:house");
 
@@ -69,175 +251,3 @@
 // alert("Seleccionaste " + cantidad +" del producto: " + articulos[ropa].nombre + " por un total de: " +(cantidad * articulos[ropa].importe ))
 
 // alert("Gracias por elegirnos. Seguinos en redes sociales para encontrar descuentos!");
-
-const articulos = [];
-
-class Producto {
-  constructor(id, nombre, importe, categoria, img) {
-    this.id = id;
-    this.nombre = nombre;
-    this.importe = importe;
-    this.categoria = categoria;
-    this.img = img;
-  }
-}
-
-articulos.push(
-  new Producto(
-    1,
-    "Polerin Yaro Negro",
-    3790,
-    "Ropa",
-    "./assets/images/card/card1.jpg"
-  )
-);
-articulos.push(
-  new Producto(
-    2,
-    "Poleron Dean Crudo",
-    8990,
-    "Ropa",
-    "./assets/images/card/card2.jpg"
-  )
-);
-articulos.push(
-  new Producto(3, "Jean Jacob", 8990, "Ropa", "./assets/images/card/card3.jpg")
-);
-articulos.push(
-  new Producto(
-    4,
-    "Poleron Dean Negro",
-    8990,
-    "Ropa",
-    "./assets/images/card/card4.jpg"
-  )
-);
-articulos.push(
-  new Producto(
-    5,
-    "Kit Male Grooming",
-    5890,
-    "MakeUp",
-    "./assets/images/card/makeup1.jpg"
-  )
-);
-articulos.push(
-  new Producto(
-    6,
-    "Mascara en gel",
-    1520,
-    "MakeUp",
-    "./assets/images/card/makeup2.jpg"
-  )
-);
-articulos.push(
-  new Producto(
-    7,
-    "Primer Filler",
-    1290,
-    "MakeUp",
-    "./assets/images/card/makeup3.jpg"
-  )
-);
-articulos.push(
-  new Producto(
-    8,
-    "Corrector Liquido",
-    1290,
-    "MakeUp",
-    "./assets/images/card/makeup4.jpg"
-  )
-);
-
-// let title = document.getElementById("title");
-// let showProducts = document.getElementById("showProducts")
-let showAllProducts = document.getElementById("showAllProducts");
-const div = document.querySelector(".div");
-
-let cart = [];
-console.log(cart)
-
-function mostrarProductos() {
-  articulos.forEach((product) => {
-    let card = document.createElement("div");
-    card.classList.add("card-body")
-    showAllProducts.append(card);
-    let img = document.createElement("img");
-    img.setAttribute("src", product.img);
-    img.classList.add("card-img-top")
-    img.classList.add("img-fluid")
-    img.classList.add("img-thumbnail")
-    let nombre = document.createElement("h3");
-    nombre.setAttribute("class", "card-text text-center")
-    nombre.innerText = product.nombre;
-    let importe = document.createElement("p");
-    importe.setAttribute("class", "card-text text-center")
-    importe.innerText = product.importe;
-    let buyButton = document.createElement("button");
-    buyButton.innerText = "Agregar al carrito";
-    card.append(img, nombre, importe, buyButton);
-
-    buyButton.addEventListener("click", function () {
-      cart.push(product);
-      alert("Agregaste " + product.nombre + "al carrito");
-      // divCart.innerHTML = ``
-      div.innerHTML = ``;
-      showCart();
-    });
-  });
-}
-console.log(cart)
-
-mostrarProductos();
-
-// Carrito
-let carrito = document.getElementById("cartList");
-const buttonCart = document.getElementById("mostrarCarrito");
-
-let alertCart = document.createElement("h2");
-
-if (!cart.lenght) {
-  alertCart.innerText = "El carrito esta vacio";
-  div.append(alertCart);
-}
-
-function showCart() {
-  alertCart.remove();
-
-  cart.forEach((element) => {
-    const divCart = document.createElement('li');
-    divCart.innerHTML += `
-        <img src= "${element.img}" class="card-img-top img-fluid img-thumbnail">
-        <h3>${element.nombre}</h3>
-        <h3>$${element.importe}</h3>`
-
-    div.appendChild(divCart);
-  });
-  
-  // Precio total
-  const total = cart
-    .map((item) => parseInt(item.importe))
-    .reduce(
-      (cartTotalPrice, currentItemPrice) => cartTotalPrice + currentItemPrice,
-      0
-    );
-  let totalCompra = document.createElement("h4");
-  totalCompra.innerText = ("Total: " + total);
-  div.append(totalCompra);
-
-  // Vaciar
-  let deleteCart = document.createElement("button");
-  deleteCart.innerText = "Vaciar carrito";
-  div.append(deleteCart);
-
-  deleteCart.onclick = () => {
-    cart = []
-    div.innerHTML = ``
-    console.log(cart)
-  }
-}
-
-buttonCart.onclick = () => {
-    div.innerHTML = ``
-    showCart()
-}
